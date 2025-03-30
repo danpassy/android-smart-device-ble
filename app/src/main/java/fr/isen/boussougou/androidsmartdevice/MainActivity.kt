@@ -85,7 +85,7 @@ fun HomeScreen() {
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
 
-            Spacer(modifier = Modifier.height(110.dp))
+            Spacer(modifier = Modifier.height(80.dp))
 
             Image(
                 painter = painterResource(id = R.drawable.bluetooth), // Assuming bluetooth_icon is the drawable resource ID
@@ -93,7 +93,7 @@ fun HomeScreen() {
                 modifier = Modifier.size(160.dp)
             )
 
-            Spacer(modifier = Modifier.height(150.dp))
+            Spacer(modifier = Modifier.height(90.dp))
 
             Button(
                 onClick = {

@@ -34,9 +34,9 @@ fun DeviceScreen(
     onResetCounter: () -> Unit
 ) {
     val ledColors = listOf(
-        Color(0xFF00897B), // LED 1 - Teal color to match the theme
-        Color(0xFFFFFFFF), // LED 2 - White
-        Color(0xFFF44336)  // LED 3 - Red
+        Color(0xFF00897B), // LED 1
+        Color(0xFF42A5F5), // LED 2
+        Color(0xFFF44336)  // LED 3
     )
 
     Scaffold(
@@ -85,7 +85,7 @@ fun DeviceScreen(
                         Text("Adresse : $address", fontSize = 14.sp, color = Color.Gray)
                         Text("RSSI : $rssi dBm", fontSize = 14.sp, color = Color.Gray)
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text(connectionStatus, fontSize = 14.sp, color = if (isConnected) Color.Green else Color.Red)
+                        Text(connectionStatus, fontSize = 14.sp, color = if (isConnected) Color.Green else Color(0xFF00695C))
                     }
                 }
 

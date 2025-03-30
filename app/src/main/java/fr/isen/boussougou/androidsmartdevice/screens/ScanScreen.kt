@@ -101,7 +101,7 @@ fun ScanScreen(
                 text = "Appareils détectés : ${devices.size}",
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp,
-                color = Color.Black,
+                color = Color(0xFF00695C),
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
@@ -122,8 +122,8 @@ fun ScanScreen(
                             modifier = Modifier.size(64.dp)
                         )
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text("Apuyer sur 'play' pour lancer le Scan BLE et sur 'pause' pour l'arreter", textAlign = TextAlign.Center,fontSize = 16.sp, color = Color.Gray)
-                        Text("Assurez-vous que le BLE de votre appareil est activé anvant de lancer le Scan", textAlign = TextAlign.Center, fontSize = 14.sp, color = Color.Gray)
+                        Text("Appuyer sur 'play' pour lancer le Scan BLE et sur 'pause' pour l'arreter", textAlign = TextAlign.Center,fontSize = 16.sp, color = Color.Gray)
+                        Text("Assurez-vous que le BLE de votre appareil est activé avant de lancer le Scan", textAlign = TextAlign.Center, fontSize = 14.sp, color = Color.Gray)
                     }
                 }
             } else {
