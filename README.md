@@ -36,7 +36,7 @@ Pour exécuter ce projet, suivez ces étapes :
 
 1. Clonez le dépôt Git :
    ```
-   git clone https://votredepot.com/AndroidSmartDevice.git
+   git clone https://github.com/danpassy/android-smart-device-ble.git
    ```
 2. Ouvrez le projet dans Android Studio.
 3. Connectez un appareil Android ou configurez un émulateur.
@@ -48,4 +48,4 @@ Les contributions à ce projet sont bienvenues. Si vous souhaitez contribuer, ve
 
 ## Licence
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+Ce projet est sous licence MIT. Voir le fichier `LICENSE.md` pour plus de détails.
