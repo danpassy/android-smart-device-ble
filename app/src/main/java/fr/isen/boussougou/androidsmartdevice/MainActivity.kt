@@ -45,13 +45,13 @@ fun HomeScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("AndroidSmartDevice",
+                title = { Text("Android Smart Device",
                     modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center) },
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.headlineMedium) },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF42A5F5),
+                    containerColor = Color(0xFF00897B), // Teal color for a fresh look
                     titleContentColor = Color.White
-
                 )
             )
         }
@@ -60,33 +60,35 @@ fun HomeScreen() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(12.dp),
+                .padding(16.dp),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(60.dp))
+            Spacer(modifier = Modifier.height(50.dp))
 
             Text(
-                text = "Bienvenue dans votre application\nSmart Device",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF42A5F5),
-                textAlign = TextAlign.Center
+                text = "Bienvenue dans votre assistant de gestion des appareils Bluetooth Low Energy (BLE)",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color(0xFF00897B),
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 8.dp)
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "Pour démarrer vos interactions avec les appareils BLE\nenvironnants cliquer sur commencer",
-                fontSize = 14.sp,
+                text = "Pour Commencer à interagir avec les appareils BLE environnants cliquez sur 'Commencer'.",
+                fontSize = 16.sp,
                 color = Color.Gray,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 8.dp)
             )
 
             Spacer(modifier = Modifier.height(110.dp))
 
             Image(
-                painter = painterResource(id = R.drawable.bleutooth01),
+                painter = painterResource(id = R.drawable.bluetooth), // Assuming bluetooth_icon is the drawable resource ID
                 contentDescription = "Bluetooth Logo",
                 modifier = Modifier.size(160.dp)
             )
@@ -120,8 +122,8 @@ fun HomeScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
-                    .padding(horizontal = 24.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF42A5F5))
+                    .padding(horizontal = 32.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00897B))
             ) {
                 Text(
                     text = "COMMENCER",
@@ -130,10 +132,11 @@ fun HomeScreen() {
                 )
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
+
 
 fun showAlert(context: Context, title: String, message: String) {
     AlertDialog.Builder(context)

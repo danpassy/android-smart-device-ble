@@ -34,24 +34,25 @@ fun DeviceScreen(
     onResetCounter: () -> Unit
 ) {
     val ledColors = listOf(
-        Color(0xFF1976D2), // LED 1 - Bleu
-        Color(0xFFFFFFFF), // LED 2 - blanc
-        Color(0xFFF44336)  // LED 3 - Rouge
+        Color(0xFF00897B), // LED 1 - Teal color to match the theme
+        Color(0xFFFFFFFF), // LED 2 - White
+        Color(0xFFF44336)  // LED 3 - Red
     )
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("AndroidSmartDevice",
-                    modifier = Modifier.fillMaxWidth(), // Fill the available width
-                    textAlign = TextAlign.Center) },
+                title = { Text("Détails du périphérique",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.headlineMedium) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Retour", tint = Color.White)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF42A5F5),
+                    containerColor = Color(0xFF00897B), // Teal color to match the theme
                     titleContentColor = Color.White
                 )
             )
@@ -69,7 +70,7 @@ fun DeviceScreen(
             if (!isConnected) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFE3F2FD)),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFFE0F2F1)), // Light teal background
                     elevation = CardDefaults.cardElevation(4.dp)
                 ) {
                     Column(
@@ -78,13 +79,13 @@ fun DeviceScreen(
                             .fillMaxWidth(),
                         horizontalAlignment = Alignment.Start
                     ) {
-                        Text("Voici l'appareil détecté", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF1976D2))
+                        Text("Appareil détecté", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF00695C))
                         Spacer(modifier = Modifier.height(16.dp))
                         Text("Nom : $name", fontSize = 16.sp)
                         Text("Adresse : $address", fontSize = 14.sp, color = Color.Gray)
                         Text("RSSI : $rssi dBm", fontSize = 14.sp, color = Color.Gray)
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text("$connectionStatus", fontSize = 14.sp, color = Color(0xFFB71C1C))
+                        Text(connectionStatus, fontSize = 14.sp, color = if (isConnected) Color.Green else Color.Red)
                     }
                 }
 
@@ -93,7 +94,7 @@ fun DeviceScreen(
 
             Button(
                 onClick = onConnectClick,
-                colors = ButtonDefaults.buttonColors(containerColor = if (isConnected) Color(0xFF42A5F5) else Color(0xFF42A5F5))
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00897B)) // Teal button color
             ) {
                 Text(if (isConnected) "Déconnecter" else "Se connecter", color = Color.White, fontSize = 16.sp)
             }
@@ -101,10 +102,10 @@ fun DeviceScreen(
             if (isConnected) {
                 Spacer(modifier = Modifier.height(32.dp))
                 Text(
-                    "Allumez les LEDs de votre choix",
+                    "Contrôlez les LEDs ci-dessous:",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF42A5F5),
+                    color = Color(0xFF00897B), // Teal color
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
 
@@ -115,7 +116,7 @@ fun DeviceScreen(
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     ledStates.forEachIndexed { index, isOn ->
-                        val color = ledColors.getOrNull(index) ?: Color.Gray
+                        val color = ledColors[index] // Color based on the state
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Button(
                                 onClick = { onLedToggle(index) },

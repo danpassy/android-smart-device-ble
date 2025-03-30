@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import fr.isen.boussougou.androidsmartdevice.R
 import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.RoundedCornerShape
-
+import androidx.compose.ui.text.style.TextAlign
 
 
 data class BLEDevice(val name: String, val address: String, val rssi: Int)
@@ -37,14 +37,15 @@ fun ScanScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("AndroidSmartDevice") },
+                title = { Text("Appareils Bluetooth",
+                    style = MaterialTheme.typography.headlineMedium) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Retour", tint = Color.White)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF42A5F5),
+                    containerColor = Color(0xFF00897B), // Teal color to match the HomeScreen
                     titleContentColor = Color.White
                 )
             )
@@ -64,12 +65,17 @@ fun ScanScreen(
                 trailingIcon = {
                     Icon(
                         painter = painterResource(R.drawable.search),
-                        contentDescription = "Rechercher"
+                        contentDescription = "Rechercher",
+                        tint = Color(0xFF00897B)
                     )
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 12.dp)
+                    .padding(bottom = 12.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color(0xFF00897B),
+                    unfocusedBorderColor = Color.Gray
+                )
             )
 
             // Bouton de Scan (lecture/pause)
@@ -83,8 +89,8 @@ fun ScanScreen(
                 IconButton(onClick = { if (isScanning) onStopScan() else onStartScan() }) {
                     Icon(
                         painter = painterResource(if (isScanning) R.drawable.pause else R.drawable.start),
-                        contentDescription = "Start/Stop Scan",
-                        tint = Color(0xFF42A5F5),
+                        contentDescription = if (isScanning) "Pause Scan" else "Commencer le Scan",
+                        tint = Color(0xFF00897B),
                         modifier = Modifier.size(48.dp)
                     )
                 }
@@ -95,6 +101,7 @@ fun ScanScreen(
                 text = "Appareils détectés : ${devices.size}",
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp,
+                color = Color.Black,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
@@ -111,13 +118,12 @@ fun ScanScreen(
                         Icon(
                             painter = painterResource(R.drawable.bluetooth),
                             contentDescription = "Bluetooth",
-                            tint = Color(0xFF42A5F5),
+                            tint = Color(0xFF00897B),
                             modifier = Modifier.size(64.dp)
                         )
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text("Lancer le scan pour voir vos appareils BLE", fontSize = 16.sp, color = Color.Gray)
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text("Assurez-vous qu'il soient allumés", fontSize = 14.sp, color = Color.Gray)
+                        Text("Apuyer sur 'play' pour lancer le Scan BLE et sur 'pause' pour l'arreter", textAlign = TextAlign.Center,fontSize = 16.sp, color = Color.Gray)
+                        Text("Assurez-vous que le BLE de votre appareil est activé anvant de lancer le Scan", textAlign = TextAlign.Center, fontSize = 14.sp, color = Color.Gray)
                     }
                 }
             } else {
@@ -136,6 +142,7 @@ fun ScanScreen(
     }
 }
 
+
 @Composable
 fun BLEDeviceItem(device: BLEDevice, onClick: () -> Unit) {
     Card(
@@ -144,7 +151,7 @@ fun BLEDeviceItem(device: BLEDevice, onClick: () -> Unit) {
             .clickable(onClick = onClick)
             .padding(vertical = 8.dp),
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFFAFAFA)),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFE0F2F1)), // Light teal background
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Row(
@@ -155,7 +162,7 @@ fun BLEDeviceItem(device: BLEDevice, onClick: () -> Unit) {
             Icon(
                 painter = painterResource(id = R.drawable.bluetooth),
                 contentDescription = "BLE Signal",
-                tint = MaterialTheme.colorScheme.primary,
+                tint = Color(0xFF00897B), // Teal color matching the theme
                 modifier = Modifier.size(40.dp)
             )
 
@@ -166,7 +173,7 @@ fun BLEDeviceItem(device: BLEDevice, onClick: () -> Unit) {
                     text = device.name,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = Color(0xFF00796B) // Darker teal for better readability
                 )
                 Text(
                     text = device.address,
@@ -178,15 +185,14 @@ fun BLEDeviceItem(device: BLEDevice, onClick: () -> Unit) {
             Spacer(modifier = Modifier.weight(1f))
 
             Text(
-                text = "${device.rssi}dB",
+                text = "${device.rssi} dB",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary,
+                color = Color(0xFF00796B), // Darker teal for consistency
                 modifier = Modifier
-                    .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(4.dp))
+                    .border(1.dp, Color(0xFF00796B), RoundedCornerShape(4.dp))
                     .padding(horizontal = 8.dp, vertical = 4.dp)
             )
         }
     }
 }
-
